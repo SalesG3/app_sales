@@ -1,0 +1,201 @@
+<section class="componente">
+    <span class="comp-titulo">
+        Controle de Categorias
+    </span>
+
+    <div class="ferramentas">
+
+        <button
+        class="btn-ferramentas"
+        (click)="incluirRegistro()">
+            Incluir
+        </button>
+
+        <button
+        class="btn-ferramentas"
+        (click)="editarRegistro()"
+        [disabled]="!dataRow.ID_CATEGORIA">
+            Alterar
+        </button>
+
+        <button
+        class="btn-ferramentas"
+        (click)="consultaRegistro()"
+        [disabled]="!dataRow.ID_CATEGORIA">
+            Consultar
+        </button>
+
+        <button
+        class="btn-ferramentas"
+        (click)="excluirRegistro()"
+        [disabled]="!dataRow.ID_CATEGORIA">
+            Excluir
+        </button>
+
+    </div>
+
+    <table class="dataGrid">
+        <thead>
+            <tr>
+                <th class="CD_CATEGORIA">
+                    Código:
+                </th>
+                <th class="NM_CATEGORIA">
+                    Categoria:
+                </th>
+                <th class="DS_CATEGORIA">
+                    Descrição:
+                </th>
+                <th class="VL_META">
+                    Meta Financeira:
+                </th>
+                <th class="SN_ATIVO">
+                    Ativo:
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+            *ngFor="let cat of dataGrid"
+            (click)="dataRow.ID_CATEGORIA = cat.ID_CATEGORIA"
+            [ngClass]="{'linha-selecionada': dataRow.ID_CATEGORIA === cat.ID_CATEGORIA}"
+            >
+                <td class="CD_CATEGORIA">
+                    {{(cat.CD_CATEGORIA).toString().padStart(3, '0')}}
+                </td>
+
+                <td class="NM_CATEGORIA">
+                    {{cat.NM_CATEGORIA}}
+                </td>
+
+                <td class="DS_CATEGORIA">
+                    {{cat.DS_CATEGORIA}}
+                </td>
+
+                <td class="VL_META">
+                    {{(cat.VL_META).replace('.',',')}}
+                </td>
+
+                <td class="SN_ATIVO">
+                    {{cat.SN_ATIVO ? "Sim" : "Não"}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<dialog class="modal" #modal>
+    <form
+    #dataForm="ngForm"
+    (ngSubmit)="salvarEditando ? alteracaoRegistro() : salvarRegistro()">
+        
+        <label for="CD_CATEGORIA">
+            Código:
+        </label>
+
+        <label for="SN_ATIVO">
+            Ativo:
+        </label>
+
+        <input
+        type="checkbox"
+        name="SN_ATIVO"
+        id="SN_ATIVO"
+        [(ngModel)]="dataRow.SN_ATIVO"
+        [disabled]="somenteLeitura"
+        >
+
+        <input
+        type="number"
+        name="CD_CATEGORIA"
+        id="CD_CATEGORIA"
+        [(ngModel)]="dataRow.CD_CATEGORIA"
+        [disabled]="somenteLeitura"
+        max="999"
+        required
+        >
+
+        <label for="NM_CATEGORIA">
+            Categoria:
+        </label>
+
+        <input
+        type="text"
+        name="NM_CATEGORIA"
+        id="NM_CATEGORIA"
+        [(ngModel)]="dataRow.NM_CATEGORIA"
+        [disabled]="somenteLeitura"
+        maxlength="50"
+        required
+        >
+
+        <label for="DS_CATEGORIA">
+            Descrição:
+        </label>
+
+        <textarea
+        name="DS_CATEGORIA"
+        id="DS_CATEGORIA"
+        [(ngModel)]="dataRow.DS_CATEGORIA"
+        [disabled]="somenteLeitura"
+        maxlength="100"
+        ></textarea>
+
+        <label for="VL_META">
+            Meta Financeira:
+        </label>
+
+        <input
+        type="number"
+        name="VL_META"
+        id="VL_META"
+        [(ngModel)]="dataRow.VL_META"
+        [disabled]="somenteLeitura"
+        required
+        max="999999"
+        >
+
+        <div class="executores" *ngIf="!somenteLeitura">
+            <button type="submit" class="btn-modal" [disabled]="dataForm.invalid">
+                {{ salvarEditando ? "Salvar Alteração" : "Salvar Registro"}}
+            </button>
+
+            <button type="button" class="btn-modal" (click)="cancelarRegistro()">
+                Cancelar
+            </button>
+        </div>
+
+        <div class="executores" *ngIf="somenteLeitura">
+            <button
+            type="button"
+            class="btn-modal"
+            (click)="somenteLeitura=false; salvarEditando=true">
+                Editar
+            </button>
+
+            <button
+            type="button"
+            class="btn-modal"
+            (click)="excluirRegistro()">
+                Excluir
+            </button>
+
+            <button
+            type="button"
+            class="btn-modal"
+            (click)="cancelarRegistro()">
+                Voltar
+            </button>
+
+        </div>
+    </form>
+</dialog>
+
+<dialog class="aviso" #aviso>
+    <span>
+        {{ mensagem }}
+    </span>
+    <button (click)="fecharAviso()">
+        Ok
+    </button>
+</dialog>

@@ -1,0 +1,61 @@
+<section class="componente">
+    
+    <span class="comp-titulo">
+        Controle de Produtos
+    </span>
+
+    <div class="ferramentas">
+
+        <button
+        class="btn-ferramentas">
+            Incluir
+        </button>
+
+        <button
+        class="btn-ferramentas">
+            Alterar
+        </button>
+
+        <button
+        class="btn-ferramentas">
+            Consultar
+        </button>
+
+        <button
+        class="btn-ferramentas">
+            Excluir
+        </button>
+
+    </div>
+
+    <table class="dataGrid"></table>
+</section>
+
+<dialog class="modal" #modal>
+
+    <form #dataForm="ngForm">
+
+        <label for="CD_PRODUTO">
+            Código:
+        </label>
+
+        <label for="SN_ATIVO">
+            Ativo:
+        </label>
+
+        <input
+        type="checkbox"
+        name="SN_ATIVO"
+        id="SN_ATIVO"
+        [(ngModel)]="dataRow.SN_ATIVO"
+        >
+
+        <input
+        type="number"
+        name="CD_PRODUTO"
+        id="CD_PRODUTO"
+        [(ngModel)]="dataRow.CD_PRODUTO"
+        >
+
+    </form>
+</dialog>

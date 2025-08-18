@@ -1,0 +1,39 @@
+<section class="sessao">
+    <form #dataForm="ngForm" (ngSubmit)="adminLogin()">
+        <span class="sec-titulo">
+            Login - Administrador
+        </span>
+        
+        <label for="CD_ENTIDADE">
+            Login:
+        </label>
+
+        <input
+        type="text"
+        id="CD_ENTIDADE"
+        name="CD_ENTIDADE"
+        [(ngModel)]="dataRow.CD_ENTIDADE"
+        required
+        >
+
+        <label for="USER_SENHA">
+            Senha:
+        </label>
+
+        <input
+        type="password"
+        id="USER_SENHA"
+        name="USER_SENHA"
+        [(ngModel)]="dataRow.USER_SENHA"
+        required
+        >
+
+        <button type="submit" [disabled]="dataForm.invalid">
+            Entrar
+        </button>
+
+        <span>
+            {{mensagem}}
+        </span>
+    </form>
+</section>

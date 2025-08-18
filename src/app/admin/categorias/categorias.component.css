@@ -1,0 +1,27 @@
+input[id="SN_ATIVO"]{
+    width: 5%;
+    height: 1rem;
+}
+
+label[for="SN_ATIVO"]{
+    width: calc(10% - 1.5rem);
+}
+
+label[for="CD_CATEGORIA"]{
+    width: calc(80% - 1.5rem);
+}
+
+.CD_CATEGORIA, .SN_ATIVO{
+    width: 3rem;
+    text-align: center;
+}
+
+.NM_CATEGORIA{
+    width: 15rem;
+    text-align: left;
+}
+
+.VL_META{
+    width: 10rem;
+    text-align: right;
+}

@@ -1,0 +1,21 @@
+.sec-titulo{
+    display: inline-block;
+    font: normal 1.25rem sans-serif;
+    margin: 1rem;
+}
+
+a{
+    display: inline-block;
+    width: calc(100% - 2rem);
+    padding: .75rem 1rem;
+
+    font: bold .95rem sans-serif;
+    color: black;
+    text-decoration: none;
+
+    transition: .5s;
+}
+
+a:hover{
+    background-color: rgba(255, 255, 255, .25);
+}
