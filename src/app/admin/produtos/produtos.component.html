@@ -7,7 +7,8 @@
     <div class="ferramentas">
 
         <button
-        class="btn-ferramentas">
+        class="btn-ferramentas"
+        (click)="incluirRegistro()">
             Incluir
         </button>
 
@@ -55,7 +56,96 @@
         name="CD_PRODUTO"
         id="CD_PRODUTO"
         [(ngModel)]="dataRow.CD_PRODUTO"
+        required
         >
+
+        <label for="IMG_PRODUTO">
+            Imagem:
+        </label>
+
+        <input
+        type="file"
+        name="IMG_PRODUTO"
+        id="IMG_PRODUTO"
+        [(ngModel)]="dataRow.IMG_PRODUTO"
+        >
+
+        <label for="NM_PRODUTO">
+            Produto:
+        </label>
+
+        <input
+        type="text"
+        name="NM_PRODUTO"
+        id="NM_PRODUTO"
+        [(ngModel)]="dataRow.NM_PRODUTO"
+        required
+        >
+
+        <label for="DS_PRODUTO">
+            Descrição:
+        </label>
+
+        <textarea
+        name="DS_PRODUTO"
+        id="DS_PRODUTO"
+        [(ngModel)]="dataRow.DS_PRODUTO"
+        required
+        ></textarea>
+
+        <label for="ID_CATEGORIA">
+            Categoria:
+        </label>
+
+        <select
+        name="ID_CATEGORIA"
+        id="ID_CATEGORIA"
+        [(ngModel)]="dataRow.ID_CATEGORIA"
+        required
+        >
+            <option hidden></option>
+            <option *ngFor="let i of dataCategorias" [value]="i.ID_CATEGORIA">
+                {{ (i.CD_CATEGORIA).toString().padStart(3, '0') + " - " + i.NM_CATEGORIA}}
+            </option>
+        </select>
+
+        <label for="VL_CUSTO">
+            Custo Total:
+        </label>
+
+        <label for="VL_PRODUTO">
+            Preço Venda:
+        </label>
+
+        <input
+        type="number"
+        name="VL_CUSTO"
+        id="VL_CUSTO"
+        [(ngModel)]="dataRow.VL_CUSTO"
+
+        >
+
+        <input
+        type="number"
+        name="VL_PRODUTO"
+        id="VL_PRODUTO"
+        [(ngModel)]="dataRow.VL_PRODUTO"
+        required
+        >
+
+        <div class="executores">
+            <button
+            type="submit"
+            class="btn-modal">
+                Salvar
+            </button>
+
+            <button
+            type="button"
+            class="btn-modal">
+                Cancelar
+            </button>
+        </div>
 
     </form>
 </dialog>

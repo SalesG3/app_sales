@@ -1,0 +1,19 @@
+label[for="CD_PRODUTO"]{
+    width: calc(80% - 1.5rem);
+}
+
+label[for="SN_ATIVO"]{
+    width: calc(10% - 1.5rem);
+}
+
+input[id="SN_ATIVO"]{
+    width: 1rem;
+    height: 1rem;
+}
+
+input[id="VL_CUSTO"],
+input[id="VL_PRODUTO"],
+label[for="VL_CUSTO"],
+label[for="VL_PRODUTO"]{
+    width: calc(50% - 1.5rem);
+}
