@@ -100,11 +100,19 @@ tbody > tr:nth-child(even){
     background-color: white;
 }
 
-.linha-selecionada{
+.linha{
     background-color: cornflowerblue !important;
     color: white;
 }
 
 input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
+}
+
+select{
+    display: inline-block;
+    width: calc(100% - 1rem);
+    margin: .25rem .5rem;
+    height: 1.75rem;
+    font: normal .95rem sans-serif;
 }
