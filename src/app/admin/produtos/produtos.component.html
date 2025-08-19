@@ -13,23 +13,57 @@
         </button>
 
         <button
-        class="btn-ferramentas">
+        class="btn-ferramentas"
+        [disabled]="!dataRow.ID_PRODUTO"
+        (click)="editarRegistro()">
             Alterar
         </button>
 
         <button
-        class="btn-ferramentas">
+        class="btn-ferramentas"
+        [disabled]="!dataRow.ID_PRODUTO"
+        (click)="consultaRegistro()">
             Consultar
         </button>
 
         <button
-        class="btn-ferramentas">
+        class="btn-ferramentas"
+        [disabled]="!dataRow.ID_PRODUTO">
             Excluir
         </button>
 
     </div>
 
-    <table class="dataGrid"></table>
+    <table class="dataGrid">
+        <thead>
+            <tr>
+                <th>Código:</th>
+                <th>Produto:</th>
+                <th>Valor:</th>
+                <th>Ativo:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+            *ngFor="let i of dataGrid"
+            (click)="dataRow.ID_PRODUTO = i.ID_PRODUTO"
+            [ngClass]="{'linha': dataRow.ID_PRODUTO === i.ID_PRODUTO}"
+            >
+                <td class="CD_PRODUTO">
+                    {{(i.CD_PRODUTO).toString().padStart(4,'0')}}
+                </td>
+                <td class="NM_PRODUTO">
+                    {{i.NM_PRODUTO}}
+                </td>
+                <td class="VL_PRODUTO">
+                    {{"R$ " + (i.VL_PRODUTO).replace('.',',')}}
+                </td>
+                <td class="SN_ATIVO">
+                    {{i.SN_ATIVO ? "Sim" : "Não"}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
 
 <dialog class="modal" #modal>
@@ -49,6 +83,7 @@
         name="SN_ATIVO"
         id="SN_ATIVO"
         [(ngModel)]="dataRow.SN_ATIVO"
+        [disabled]="somenteLeitura"
         >
 
         <input
@@ -56,6 +91,7 @@
         name="CD_PRODUTO"
         id="CD_PRODUTO"
         [(ngModel)]="dataRow.CD_PRODUTO"
+        [disabled]="somenteLeitura"
         required
         >
 
@@ -68,6 +104,7 @@
         name="IMG_PRODUTO"
         id="IMG_PRODUTO"
         [(ngModel)]="dataRow.IMG_PRODUTO"
+        [disabled]="somenteLeitura"
         (change)="tratarImagem($event)"
         >
 
@@ -80,6 +117,7 @@
         name="NM_PRODUTO"
         id="NM_PRODUTO"
         [(ngModel)]="dataRow.NM_PRODUTO"
+        [disabled]="somenteLeitura"
         required
         >
 
@@ -91,6 +129,7 @@
         name="DS_PRODUTO"
         id="DS_PRODUTO"
         [(ngModel)]="dataRow.DS_PRODUTO"
+        [disabled]="somenteLeitura"
         required
         ></textarea>
 
@@ -102,6 +141,7 @@
         name="ID_CATEGORIA"
         id="ID_CATEGORIA"
         [(ngModel)]="dataRow.ID_CATEGORIA"
+        [disabled]="somenteLeitura"
         required
         >
             <option hidden></option>
@@ -123,6 +163,7 @@
         name="VL_CUSTO"
         id="VL_CUSTO"
         [(ngModel)]="dataRow.VL_CUSTO"
+        [disabled]="somenteLeitura"
         >
 
         <input
@@ -130,15 +171,16 @@
         name="VL_PRODUTO"
         id="VL_PRODUTO"
         [(ngModel)]="dataRow.VL_PRODUTO"
+        [disabled]="somenteLeitura"
         required
         >
 
-        <div class="executores">
+        <div class="executores" *ngIf="!somenteLeitura">
             <button
             type="submit"
             class="btn-modal"
             [disabled]="dataForm.invalid">
-                Salvar
+                {{salvarEditando ? "Salvar Alteração" : "Salvar Registro"}}
             </button>
 
             <button
@@ -147,6 +189,30 @@
             (click)="cancelarRegistro()">
                 Cancelar
             </button>
+        </div>
+
+        <div class="executores" *ngIf="somenteLeitura">
+            
+            <button
+            type="button"
+            class="btn-modal"
+            (click)="somenteLeitura=false;salvarEditando=true">
+                Editar
+            </button>
+
+            <button
+            type="button"
+            class="btn-modal">
+                Excluir
+            </button>
+
+            <button
+            type="button"
+            class="btn-modal"
+            (click)="cancelarRegistro()">
+                Voltar
+            </button>
+
         </div>
 
     </form>
