@@ -1,4 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --color-primary-orange: #d75413;
+  --color-secondary-orange: #db7a49;
+
+  --color-primary-green: #32cd32;
+  --color-secondary-green: #71ce71;
+
+  --color-primary-blue: #1396d7;
+  --color-secondary-blue: #49abdb;
+
+  --color-gray: #aaaaaa;
+  --color-primary-gray: #555555;
+  --color-secondary-gray: #6a6a6a;
+
+  --color-white: #ffffff;
+  --color-white2: #dddddd;
+  --color-black: #000000;
+
+  --color-error: #d71313;
+  --color-success: #4caf50;
+
+  --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+  --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.15);
+  --gradient-bg: linear-gradient(
+    135deg,
+    var(--color-white),
+    var(--color-white2)
+  );
+
+  --color-primary-orange-rgb: 215, 84, 19;
+  --color-secondary-orange-rgb: 219, 122, 73;
+  --color-primary-blue-rgb: 19, 150, 215;
+}
+
+
+
+
+
 .sessao{
     position: relative;
     width: 100vw;
