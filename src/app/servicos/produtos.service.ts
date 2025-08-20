@@ -93,4 +93,29 @@ export class ProdutosService {
     return data
     
   }
+
+  async alteraProduto(ID_PRODUTO : number, dataRow : object){
+
+    let request = await fetch(environment.API + `produtos/${ID_PRODUTO}/altera`, {
+      method: "PUT",
+      headers: this.headers,
+      body: JSON.stringify(dataRow)
+    })
+
+    let data = await request.json()
+
+    return data
+  }
+
+  async deleteRegistro(ID_PRODUTO : number){
+
+    let request = await fetch(environment.API + `produtos/${ID_PRODUTO}/delete`, {
+      method: "DELETE",
+      headers: this.headers
+    })
+
+    let data = await request.json()
+
+    return data
+  }
 }

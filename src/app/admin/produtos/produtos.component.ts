@@ -24,8 +24,8 @@ export class ProdutosComponent implements OnInit {
     VL_PRODUTO  : ''    ,
   }
 
-  IMG_URL : string = ''
   IMG_PRODUTO : any
+  IMG_INPUT: any
 
   @ViewChild('modal') modal !: ElementRef
   @ViewChild('aviso') aviso !: ElementRef
@@ -53,6 +53,8 @@ export class ProdutosComponent implements OnInit {
     this.modal.nativeElement.close()
     this.somenteLeitura = false
     this.salvarEditando = false
+    this.IMG_PRODUTO = null
+    this.IMG_INPUT = null
     this.dataRow = {
       ID_PRODUTO  : this.dataRow.ID_PRODUTO ,
       IMG_PRODUTO : ''    ,
@@ -70,8 +72,6 @@ export class ProdutosComponent implements OnInit {
     let data = await this.servico.salvarProduto(this.dataRow)
 
     if(data.sucesso){
-      this.imagem.nativeElement
-      //TESTANDO
       if(this.IMG_PRODUTO){
         await this.servico.salvarImagem(this.IMG_PRODUTO, data.ID_PRODUTO)
       }
@@ -109,6 +109,41 @@ export class ProdutosComponent implements OnInit {
 
     if(input.files){
       this.IMG_PRODUTO = input.files[0]
+    }
+  }
+
+  async alteraRegistro(){
+    let data = await this.servico.alteraProduto(this.dataRow.ID_PRODUTO, this.dataRow)
+
+    if(data.sucesso){
+      if(this.IMG_PRODUTO){
+        await this.servico.salvarImagem(this.IMG_PRODUTO, this.dataRow.ID_PRODUTO)
+      }
+
+      this.dataGrid = await this.servico.gridProduto()
+      this.mensagem = data.mensagem
+      this.cancelarRegistro()
+      this.aviso.nativeElement.showModal()
+    }
+    else{
+      this.mensagem = data.mensagem
+      this.aviso.nativeElement.showModal()
+    }
+  }
+
+  async excluirRegistro(){
+    let data = await this.servico.deleteRegistro(this.dataRow.ID_PRODUTO)
+
+    if(data.sucesso){
+      this.dataGrid = await this.servico.gridProduto()
+      this.mensagem = data.mensagem
+      this.cancelarRegistro()
+      this.dataRow.ID_PRODUTO = 0 
+      this.aviso.nativeElement.showModal()
+    }
+    else{
+      this.mensagem = data.mensagem
+      this.aviso.nativeElement.showModal()
     }
   }
 }

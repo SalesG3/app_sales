@@ -28,7 +28,8 @@
 
         <button
         class="btn-ferramentas"
-        [disabled]="!dataRow.ID_PRODUTO">
+        [disabled]="!dataRow.ID_PRODUTO"
+        (click)="excluirRegistro()">
             Excluir
         </button>
 
@@ -68,7 +69,7 @@
 
 <dialog class="modal" #modal>
 
-    <form #dataForm="ngForm" (ngSubmit)="salvarRegistro()">
+    <form #dataForm="ngForm" (ngSubmit)="salvarEditando ? alteraRegistro() : salvarRegistro()">
 
         <label for="CD_PRODUTO">
             Código:
@@ -105,6 +106,7 @@
         id="IMG_PRODUTO"
         (change)="tratarImagem($event)"
         [disabled]="somenteLeitura"
+        [(ngModel)]="IMG_INPUT"
         >
 
         <button
@@ -208,7 +210,8 @@
 
             <button
             type="button"
-            class="btn-modal">
+            class="btn-modal"
+            (click)="excluirRegistro()">
                 Excluir
             </button>
 
