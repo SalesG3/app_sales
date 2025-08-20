@@ -1,0 +1,26 @@
+.sub-componente{
+    border: 1px solid gray;
+    border-radius: .5rem;
+    height: 10rem;
+
+    & input{
+        width: calc(33% - 1.5rem);
+    }
+    & label{
+        width: calc(33% - 1rem);
+    }
+}
+
+label[for='ID_PRODUTO']{
+    width: 75% !important;
+}
+
+label[for='SN_ATIVO']{
+    width: 10% !important;
+}
+
+input[id="SN_ATIVO"]{
+    width: 1rem !important;
+    height: 1rem !important;
+}
+

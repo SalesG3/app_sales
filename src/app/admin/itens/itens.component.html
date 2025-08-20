@@ -1,0 +1,109 @@
+<section class="sub-componente">
+
+    <div *ngIf="!telaRegistro">
+        <div class="sub-executores">
+            <button type="button" (click)="telaRegistro = true">
+                Incluir
+            </button>
+
+            <button type="button">
+                Alterar
+            </button>
+
+            <button type="button">
+                Excluir
+            </button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Produto:</th>
+                    <th>Valor Atual:</th>
+                    <th>Percentual:</th>
+                    <th>Valor Promocional:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let i of dataGrid">
+                    <td>{{i.CD_PRODUTO + ' - ' + i.NM_PRODUTO}}</td>
+                    <td>{{i.VL_PRODUTO}}</td>   
+                    <td>{{i.PC_PROMOCAO}}</td>
+                    <td>{{i.VL_PROMOCAO}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="telaRegistro">
+        <form>
+            <div class="sub-executores">
+                <button type="submit">
+                    Salvar
+                </button>
+
+                <button type="button" (click)="telaRegistro = false">
+                    Cancelar
+                </button>
+            </div>
+    
+            <label for="ID_PRODUTO">
+                Produto:
+            </label>
+    
+            <label for="SN_ATIVO">
+                Ativo:
+            </label>
+    
+            <input
+            type="checkbox"
+            name="SN_ATIVO"
+            id="SN_ATIVO"
+            >
+
+            <select
+            name="ID_PRODUTO"
+            id="ID_PRODUTO"
+            >
+                <option hidden></option>
+                <option *ngFor="let i of dataProdutos" [value]="i.ID_PRODUTO">
+                    {{i.CD_PRODUTO + ' - ' + i.NM_PRODUTO}}
+                </option>
+            </select>
+    
+            <label for="VL_PRODUTO">
+                Valor Atual:
+            </label>
+            
+            <label for="PC_PROMOCAO">
+                Percentual:
+            </label>
+                    
+            <label for="VL_PROMOCAO">
+                Valor Promocional:
+            </label>
+    
+            <input
+            type="number"
+            name="VL_PRODUTO"
+            id="VL_PRODUTO"
+            disabled
+            >
+    
+            <input
+            type="number"
+            name="PC_PROMOCAO"
+            id="PC_PROMOCAO"
+            required
+            >
+    
+            <input
+            type="number"
+            name="VL_PROMOCAO"
+            id="VL_PROMOCAO"
+            required
+            >
+
+        </form>
+    </div>
+</section>

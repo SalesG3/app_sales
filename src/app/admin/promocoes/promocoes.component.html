@@ -1,0 +1,99 @@
+<section class="componente">
+
+    <span class="comp-titulo">
+        Controle de Promoções
+    </span>
+
+    <div class="ferramentas">
+        <button class="btn-ferramentas" (click)="incluirRegistro()">
+            Incluir
+        </button>
+
+        <button class="btn-ferramentas">
+            Alterar
+        </button>
+
+        <button class="btn-ferramentas">
+            Consultar
+        </button>
+
+        <button class="btn-ferramentas">
+            Excluir
+        </button>
+    </div>
+
+    <table class="dataGrid">
+        <thead>
+            <tr></tr>
+        </thead>
+        <tbody>
+            <tr></tr>
+        </tbody>
+    </table>
+</section>
+
+<dialog class="modal" #modal>
+    <form>
+        <label for="CD_PROMOCAO">
+            Código:
+        </label>
+
+        <input
+        type="number"
+        name="CD_PROMOCAO"
+        id="CD_PROMOCAO"
+        [(ngModel)]="dataRow.CD_PRODUTO"
+        required
+        >
+
+        <label for="DT_INICIO">
+            Início:
+        </label>
+
+        <label for="DT_FINAL">
+            Final:
+        </label>
+
+        <input
+        type="date"
+        name="DT_INICIO"
+        id="DT_INICIO"
+        [(ngModel)]="dataRow.DT_INICIO"
+        required
+        >
+
+        <input
+        type="date"
+        name="DT_FINAL"
+        id="DT_FINAL"
+        [(ngModel)]="dataRow.DT_FINAL"
+        required
+        >
+
+        <label for="NM_PROMOCAO">
+            Promoção:
+        </label>
+
+        <input
+        type="text"
+        name="NM_PROMOCAO"
+        id="NM_PROMOCAO"
+        [(ngModel)]="dataRow.NM_PROMOCAO"
+        required
+        >
+
+        <label for="DS_PROMOCAO">
+            Descrição:
+        </label>
+
+        <textarea
+        name="DS_PROMOCAO"
+        id="DS_PROMOCAO"
+        [(ngModel)]="dataRow.DS_PROMOCAO"
+        ></textarea>
+
+        <app-itens></app-itens>
+        
+    </form>
+
+</dialog>
