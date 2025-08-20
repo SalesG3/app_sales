@@ -73,4 +73,24 @@ export class ProdutosService {
 
     return data[0]
   }
+
+  async salvarImagem(IMG_PRODUTO : File, ID_PRODUTO : Number){
+
+    let formData = new FormData()
+
+    formData.append('file', IMG_PRODUTO)
+
+    let request = await fetch(environment.API+`produtos/${ID_PRODUTO}/imagem`, {
+      method: "POST",
+      headers: {
+        token: environment.TOKEN
+      },
+      body: formData
+    })
+
+    let data = await request.json()
+
+    return data
+    
+  }
 }

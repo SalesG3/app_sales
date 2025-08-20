@@ -18,7 +18,6 @@ export class MenuComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    console.log(this.servico.ID_ENTIDADE)
     if(!this.servico.ID_ENTIDADE){
       this.router.navigate(['/admin/login'])
       

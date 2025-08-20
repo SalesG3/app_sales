@@ -14,9 +14,9 @@ export class ProdutosComponent implements OnInit {
 
   dataRow = {
     ID_PRODUTO  : 0     ,
+    IMG_PRODUTO : ''    ,
     CD_PRODUTO  : ''    ,
     SN_ATIVO    : true  ,
-    IMG_PRODUTO : ''    ,
     NM_PRODUTO  : ''    ,
     DS_PRODUTO  : ''    ,
     ID_CATEGORIA: 0     ,
@@ -24,8 +24,12 @@ export class ProdutosComponent implements OnInit {
     VL_PRODUTO  : ''    ,
   }
 
+  IMG_URL : string = ''
+  IMG_PRODUTO : any
+
   @ViewChild('modal') modal !: ElementRef
   @ViewChild('aviso') aviso !: ElementRef
+  @ViewChild('imagem') imagem !: ElementRef
 
   mensagem        : string = ''
   dataCategorias  : Array<any> = []
@@ -51,9 +55,9 @@ export class ProdutosComponent implements OnInit {
     this.salvarEditando = false
     this.dataRow = {
       ID_PRODUTO  : this.dataRow.ID_PRODUTO ,
+      IMG_PRODUTO : ''    ,
       CD_PRODUTO  : ''    ,
       SN_ATIVO    : true  ,
-      IMG_PRODUTO : ''    ,
       NM_PRODUTO  : ''    ,
       DS_PRODUTO  : ''    ,
       ID_CATEGORIA: 0     ,
@@ -66,6 +70,12 @@ export class ProdutosComponent implements OnInit {
     let data = await this.servico.salvarProduto(this.dataRow)
 
     if(data.sucesso){
+      this.imagem.nativeElement
+      //TESTANDO
+      if(this.IMG_PRODUTO){
+        await this.servico.salvarImagem(this.IMG_PRODUTO, data.ID_PRODUTO)
+      }
+
       this.dataGrid = await this.servico.gridProduto()
       this.mensagem = data.mensagem
       this.cancelarRegistro()
@@ -82,20 +92,6 @@ export class ProdutosComponent implements OnInit {
     this.mensagem = ''
   }
 
-
-  tratarImagem(e : Event){
-    let input = e.target as HTMLInputElement
-    let reader = new FileReader()
-
-    if(input.files && input.files.length > 0){
-      reader.onload = () => {
-        this.dataRow.IMG_PRODUTO = reader.result as string
-      }
-
-      reader.readAsDataURL(input.files[0])
-    }
-  }
-
   async consultaRegistro(){
     this.dataRow = await this.servico.consultaProduto(this.dataRow.ID_PRODUTO)
     this.somenteLeitura = true
@@ -106,5 +102,13 @@ export class ProdutosComponent implements OnInit {
     this.salvarEditando = true
     this.dataRow = await this.servico.consultaProduto(this.dataRow.ID_PRODUTO)
     this.modal.nativeElement.showModal()
+  }
+
+  tratarImagem(e : Event){
+    let input = e.target as HTMLInputElement
+
+    if(input.files){
+      this.IMG_PRODUTO = input.files[0]
+    }
   }
 }

@@ -103,10 +103,16 @@
         type="file"
         name="IMG_PRODUTO"
         id="IMG_PRODUTO"
-        [(ngModel)]="dataRow.IMG_PRODUTO"
-        [disabled]="somenteLeitura"
         (change)="tratarImagem($event)"
+        [disabled]="somenteLeitura"
         >
+
+        <button
+        type="button"
+        class="btn-imagem"
+        *ngIf="somenteLeitura"
+        (click)="this.imagem.showModal()"
+        >Ver imagem</button>
 
         <label for="NM_PRODUTO">
             Produto:
@@ -228,4 +234,8 @@
         Ok
     </button>
 
+</dialog>
+
+<dialog #imagem>
+    <img [src]="dataRow.IMG_PRODUTO">
 </dialog>
