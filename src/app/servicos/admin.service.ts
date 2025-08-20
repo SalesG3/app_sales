@@ -12,8 +12,8 @@ export class AdminService {
 
   constructor() { }
 
-  ID_ENTIDADE = 1
-  NM_ENTIDADE = 'Lanchonete Sales'
+  ID_ENTIDADE = 0
+  NM_ENTIDADE = ''
 
   async loginAdmin(dataRow:object){
 
