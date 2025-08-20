@@ -58,7 +58,7 @@
             <tr
             *ngFor="let cat of dataGrid"
             (click)="dataRow.ID_CATEGORIA = cat.ID_CATEGORIA"
-            [ngClass]="{'linha-selecionada': dataRow.ID_CATEGORIA === cat.ID_CATEGORIA}"
+            [ngClass]="{'linha': dataRow.ID_CATEGORIA === cat.ID_CATEGORIA}"
             >
                 <td class="CD_CATEGORIA">
                     {{(cat.CD_CATEGORIA).toString().padStart(3, '0')}}
@@ -73,7 +73,7 @@
                 </td>
 
                 <td class="VL_META">
-                    {{(cat.VL_META).replace('.',',')}}
+                    {{"R$ " + (cat.VL_META).replace('.',',')}}
                 </td>
 
                 <td class="SN_ATIVO">

@@ -153,3 +153,8 @@ select{
     height: 1.75rem;
     font: normal .95rem sans-serif;
 }
+
+.linha{
+    background-color: cornflowerblue !important;
+    color: white;
+}

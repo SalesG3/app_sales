@@ -50,14 +50,47 @@ export class ProdutosService {
     return data
   }
 
-  async teste(){
-    let request = await fetch(environment.API + 'teste', {
+  async gridProduto(){
+    
+    let request = await fetch(environment.API + `produtos/${this.sessao.ID_ENTIDADE}/grid`, {
       method: "GET",
       headers: this.headers
     })
 
-    let data = request.json()
+    let data = await request.json()
 
     return data
+  }
+
+  async consultaProduto(ID_PRODUTO:number){
+
+    let request = await fetch(environment.API+`produtos/${ID_PRODUTO}/consulta`, {
+      method: "GET",
+      headers: this.headers
+    })
+
+    let data = await request.json()
+
+    return data[0]
+  }
+
+  async salvarImagem(IMG_PRODUTO : File, ID_PRODUTO : Number){
+
+    let formData = new FormData()
+
+    formData.append('file', IMG_PRODUTO)
+
+    let request = await fetch(environment.API+`produtos/${ID_PRODUTO}/imagem`, {
+      method: "POST",
+      headers: {
+        token: environment.TOKEN
+      },
+      body: formData
+    })
+
+    let data = await request.json()
+
+    return data
+    
   }
 }

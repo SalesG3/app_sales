@@ -17,3 +17,11 @@ label[for="VL_CUSTO"],
 label[for="VL_PRODUTO"]{
     width: calc(50% - 1.5rem);
 }
+
+.btn-imagem{
+    width: calc(20% - 1.5rem);
+}
+
+input[type='file']{
+    width: calc(80% - 1.5rem);
+}
