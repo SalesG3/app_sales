@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-block-size: 100vh;
+  min-height: 100vh;
   background: var(--gradient-bg);
   padding: 20px;
   box-sizing: border-box;
@@ -17,8 +17,8 @@
   padding: 50px;
   border-radius: 15px;
   box-shadow: var(--shadow-medium);
-  max-inline-size: 400px;
-  inline-size: 100%;
+  max-width: 400px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -28,7 +28,7 @@
 /* Título do formulário */
 .sec-titulo {
   color: var(--color-primary-gray);
-  margin-block-end: 30px;
+  margin-bottom: 30px;
   font-size: 2.2em;
   text-align: center;
   letter-spacing: -0.04em;
@@ -39,7 +39,7 @@
 
 /* Labels */
 label {
-  margin-block-end: 8px;
+  margin-bottom: 8px;
   color: var(--color-secondary-gray);
   font-size: 1.05em;
   font-weight: 600;
@@ -57,7 +57,7 @@ input[type="password"] {
   background-color: var(--color-white2);
   transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out,
     background-color 0.3s ease-in-out;
-  inline-size: 100%;
+  width: 100%;
   box-sizing: border-box;
 }
 
@@ -81,10 +81,10 @@ button[type="submit"] {
   cursor: pointer;
   transition: background-color 0.3s ease-in-out, transform 0.15s ease-in-out,
     box-shadow 0.2s ease-in-out;
-  margin-block-start: 15px;
+  margin-top: 15px;
   box-shadow: 0 5px 15px rgba(var(--color-primary-orange-rgb), 0.25);
   letter-spacing: 0.05em;
-  inline-size: 100%;
+  width: 100%;
 }
 
 button[type="submit"]:hover:not(:disabled) {
@@ -106,7 +106,7 @@ span {
   text-align: center;
   font-size: 1em;
   color: var(--color-secondary-gray);
-  margin-block-start: 10px;
+  margin-top: 10px;
 }
 
 /* Responsividade */
