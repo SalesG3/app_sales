@@ -4,6 +4,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { MenuComponent } from './admin/menu/menu.component';
 import { CategoriasComponent } from './admin/categorias/categorias.component';
 import { ProdutosComponent } from './admin/produtos/produtos.component';
+import { PromocoesComponent } from './admin/promocoes/promocoes.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: '/admin/login' , pathMatch: 'full'},
@@ -11,6 +12,7 @@ export const routes: Routes = [
     {path: 'admin', component: MenuComponent, children: [
         {path: 'dashboard', component: DashboardComponent},
         {path: 'categorias', component: CategoriasComponent},
-        {path: 'produtos', component: ProdutosComponent}
+        {path: 'produtos', component: ProdutosComponent},
+        {path: 'promocoes', component: PromocoesComponent}
     ]}
 ];

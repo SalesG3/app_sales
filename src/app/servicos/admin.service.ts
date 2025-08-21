@@ -12,8 +12,8 @@ export class AdminService {
 
   constructor() { }
 
-  ID_ENTIDADE = 0
-  NM_ENTIDADE = ''
+  ID_ENTIDADE = 1
+  NM_ENTIDADE = 'FIXAGEM PARA TESTE'
 
   async loginAdmin(dataRow:object){
 

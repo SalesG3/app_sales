@@ -1,0 +1,6 @@
+input[id="DT_INICIO"]   ,
+input[id="DT_FINAL"]    ,
+label[for="DT_INICIO"]  ,
+label[for="DT_FINAL"]   {
+    width: calc(50% - 1.5rem);
+}
