@@ -24,4 +24,16 @@ export class PromocoesService {
 
     return data
   }
+
+  async codigoPromocao(){
+
+    let request = await fetch(environment.API + `promocoes/${this.sessao.ID_ENTIDADE}/codigo`,{
+      method: "GET",
+      headers: this.headers
+    })
+
+    let data = await request.json()
+
+    return data[0].CD_PROMOCAO
+  }
 }

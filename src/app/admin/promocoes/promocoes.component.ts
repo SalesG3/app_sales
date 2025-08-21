@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ItensComponent } from '../itens/itens.component';
+import { PromocoesService } from '../../servicos/promocoes.service';
 
 @Component({
   selector: 'app-promocoes',
@@ -21,11 +22,17 @@ export class PromocoesComponent {
   }
 
   @ViewChild('modal') modal !: ElementRef
+  @ViewChild(ItensComponent) itens !: ItensComponent
 
-  constructor(){}
+  constructor(private servico : PromocoesService){}
 
-  incluirRegistro(){
+  async incluirRegistro(){
+    this.dataRow.CD_PRODUTO = await this.servico.codigoPromocao()
     this.modal.nativeElement.showModal()
+  }
+
+  salvarRegistro(){
+    
   }
 
 }

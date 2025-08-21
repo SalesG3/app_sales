@@ -2,47 +2,64 @@
 
     <div *ngIf="!telaRegistro">
         <div class="sub-executores">
-            <button type="button" (click)="telaRegistro = true">
+            <button
+            type="button"
+            (click)="telaRegistro = true; dataRow.ID_PRODUTO = 0">
                 Incluir
             </button>
 
-            <button type="button">
+            <button
+            type="button"
+            [disabled]="!dataRow.ID_PRODUTO"
+            (click)="editarRegistro()">
                 Alterar
             </button>
 
-            <button type="button">
+            <button
+            type="button"
+            [disabled]="!dataRow.ID_PRODUTO"
+            (click)="excluirRegistro()">
                 Excluir
             </button>
         </div>
 
-        <table>
+        <table class="subgrid">
             <thead>
                 <tr>
                     <th>Produto:</th>
                     <th>Valor Atual:</th>
                     <th>Percentual:</th>
                     <th>Valor Promocional:</th>
+                    <th>Ativo:</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let i of dataGrid">
-                    <td>{{i.CD_PRODUTO + ' - ' + i.NM_PRODUTO}}</td>
+                <tr
+                *ngFor="let i of dataGrid"
+                (click)="dataRow.ID_PRODUTO = i.ID_PRODUTO"
+                [ngClass]="{'linha' : dataRow.ID_PRODUTO == i.ID_PRODUTO}">
+                    <td>{{ produtoGrid(i.ID_PRODUTO) }}</td>
                     <td>{{i.VL_PRODUTO}}</td>   
                     <td>{{i.PC_PROMOCAO}}</td>
                     <td>{{i.VL_PROMOCAO}}</td>
+                    <td>{{i.SN_ATIVO ? "Sim" : "Não"}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
 
     <div *ngIf="telaRegistro">
-        <form>
+        <form
+        #dataForm="ngForm"
+        (ngSubmit)="salvarEditando ? alteraRegistro() : salvarRegistro()">
             <div class="sub-executores">
-                <button type="submit">
-                    Salvar
+                <button
+                type="submit"
+                [disabled]="dataForm.invalid">
+                    {{ salvarEditando ? "Alterar" : "Salvar"}}
                 </button>
 
-                <button type="button" (click)="telaRegistro = false">
+                <button type="button" (click)="cancelarRegistro()">
                     Cancelar
                 </button>
             </div>
@@ -59,11 +76,14 @@
             type="checkbox"
             name="SN_ATIVO"
             id="SN_ATIVO"
+            [(ngModel)]="dataRow.SN_ATIVO"
             >
 
             <select
             name="ID_PRODUTO"
             id="ID_PRODUTO"
+            [(ngModel)]="dataRow.ID_PRODUTO"
+            (ngModelChange)="selecaoProduto($event)"
             >
                 <option hidden></option>
                 <option *ngFor="let i of dataProdutos" [value]="i.ID_PRODUTO">
@@ -87,6 +107,7 @@
             type="number"
             name="VL_PRODUTO"
             id="VL_PRODUTO"
+            [(ngModel)]="dataRow.VL_PRODUTO"
             disabled
             >
     
@@ -94,6 +115,9 @@
             type="number"
             name="PC_PROMOCAO"
             id="PC_PROMOCAO"
+            min="1" max="99"
+            [(ngModel)]="dataRow.PC_PROMOCAO"
+            (ngModelChange)="calcularValor($event)"
             required
             >
     
@@ -101,9 +125,21 @@
             type="number"
             name="VL_PROMOCAO"
             id="VL_PROMOCAO"
+            min="0.1" max="99999"
+            [(ngModel)]="dataRow.VL_PROMOCAO"
+            (ngModelChange)="calcularPercentual($event)"
             required
             >
 
         </form>
     </div>
 </section>
+
+<dialog class="aviso" #aviso>
+    <span>
+        {{mensagem}}
+    </span>
+    <button>
+        Ok
+    </button>
+</dialog>
