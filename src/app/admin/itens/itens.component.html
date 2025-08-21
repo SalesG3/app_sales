@@ -4,20 +4,21 @@
         <div class="sub-executores">
             <button
             type="button"
-            (click)="telaRegistro = true; dataRow.ID_PRODUTO = 0">
+            (click)="telaRegistro = true; dataRow.ID_PRODUTO = 0"
+            [disabled]="somenteLeitura">
                 Incluir
             </button>
 
             <button
             type="button"
-            [disabled]="!dataRow.ID_PRODUTO"
+            [disabled]="!dataRow.ID_PRODUTO || somenteLeitura"
             (click)="editarRegistro()">
                 Alterar
             </button>
 
             <button
             type="button"
-            [disabled]="!dataRow.ID_PRODUTO"
+            [disabled]="!dataRow.ID_PRODUTO || somenteLeitura"
             (click)="excluirRegistro()">
                 Excluir
             </button>

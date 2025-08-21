@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { PromocoesService } from '../../servicos/promocoes.service';
 import { FormsModule } from '@angular/forms';
 
@@ -17,8 +17,7 @@ export class ItensComponent implements OnInit{
     VL_PRODUTO  : 0   ,
     PC_PROMOCAO : 0   ,
     VL_PROMOCAO : 0   ,
-    SN_ATIVO    : true,
-    STATUS      : ''  ,
+    SN_ATIVO    : true
   }
   
   mensagem        : string = ''
@@ -28,6 +27,7 @@ export class ItensComponent implements OnInit{
   salvarEditando  = false
 
   @ViewChild('aviso') aviso !: ElementRef
+  somenteLeitura = false
 
   constructor(private servico : PromocoesService){ }
 
@@ -67,8 +67,7 @@ export class ItensComponent implements OnInit{
       VL_PRODUTO  : 0   ,
       PC_PROMOCAO : 0   ,
       VL_PROMOCAO : 0   ,
-      SN_ATIVO    : true,
-      STATUS      : ''  ,
+      SN_ATIVO    : true
     }
   }
 
@@ -87,6 +86,7 @@ export class ItensComponent implements OnInit{
   excluirRegistro(){
     let index = this.dataGrid.findIndex(i => i.ID_PRODUTO == this.dataRow.ID_PRODUTO)
     this.dataGrid.splice(index, 1)
+    this.dataRow.ID_PRODUTO = 0
   }
 
   editarRegistro(){

@@ -5,35 +5,72 @@
     </span>
 
     <div class="ferramentas">
-        <button class="btn-ferramentas" (click)="incluirRegistro()">
+        <button
+        class="btn-ferramentas"
+        (click)="incluirRegistro()">
             Incluir
         </button>
 
-        <button class="btn-ferramentas">
+        <button
+        class="btn-ferramentas"
+        [disabled]="!dataRow.ID_PROMOCAO">
             Alterar
         </button>
 
-        <button class="btn-ferramentas">
+        <button
+        class="btn-ferramentas"
+        [disabled]="!dataRow.ID_PROMOCAO"
+        (click)="consultaRegistro()">
             Consultar
         </button>
 
-        <button class="btn-ferramentas">
+        <button
+        class="btn-ferramentas"
+        [disabled]="!dataRow.ID_PROMOCAO"
+        (click)="excluirRegistro()">
             Excluir
         </button>
     </div>
 
     <table class="dataGrid">
         <thead>
-            <tr></tr>
+            <tr>
+                <th>Código:</th>
+                <th>Promoção:</th>
+                <th>Inicio:</th>
+                <th>Final:</th>
+            </tr>
         </thead>
         <tbody>
-            <tr></tr>
+            <tr
+            *ngFor="let i of dataGrid"
+            (click)="dataRow.ID_PROMOCAO = i.ID_PROMOCAO"
+            [ngClass]="{'linha' : dataRow.ID_PROMOCAO == i.ID_PROMOCAO}">
+                <td>
+                    {{(i.CD_PROMOCAO).toString().padStart(3, '0')}}
+                </td>
+
+                <td>
+                    {{i.NM_PROMOCAO}}
+                </td>
+
+                <td>
+                    {{i.DT_INICIO}}
+                </td>
+
+                <td>
+                    {{i.DT_FINAL}}
+                </td>
+            </tr>
         </tbody>
     </table>
 </section>
 
 <dialog class="modal" #modal>
-    <form>
+    <form
+    #dataForm="ngForm"
+    (ngSubmit)="salvarRegistro()">
+
         <label for="CD_PROMOCAO">
             Código:
         </label>
@@ -42,7 +79,8 @@
         type="number"
         name="CD_PROMOCAO"
         id="CD_PROMOCAO"
-        [(ngModel)]="dataRow.CD_PRODUTO"
+        [(ngModel)]="dataRow.CD_PROMOCAO"
+        [disabled]="somenteLeitura"
         required
         >
 
@@ -59,6 +97,7 @@
         name="DT_INICIO"
         id="DT_INICIO"
         [(ngModel)]="dataRow.DT_INICIO"
+        [disabled]="somenteLeitura"
         required
         >
 
@@ -67,6 +106,7 @@
         name="DT_FINAL"
         id="DT_FINAL"
         [(ngModel)]="dataRow.DT_FINAL"
+        [disabled]="somenteLeitura"
         required
         >
 
@@ -79,6 +119,7 @@
         name="NM_PROMOCAO"
         id="NM_PROMOCAO"
         [(ngModel)]="dataRow.NM_PROMOCAO"
+        [disabled]="somenteLeitura"
         required
         >
 
@@ -90,20 +131,57 @@
         name="DS_PROMOCAO"
         id="DS_PROMOCAO"
         [(ngModel)]="dataRow.DS_PROMOCAO"
+        [disabled]="somenteLeitura"
         ></textarea>
 
         <app-itens></app-itens>
 
-        <div class="executores">
-            <button type="button" class="btn-modal" (click)="salvarRegistro()">
+        <div class="executores" *ngIf="!somenteLeitura">
+            <button
+            type="submit"
+            class="btn-modal"
+            [disabled]="dataForm.invalid || (itens ? itens.telaRegistro : false)">
                 Salvar
             </button>
 
-            <button type="button" class="btn-modal">
+            <button
+            type="button"
+            class="btn-modal"
+            (click)="cancelarRegistro()">
                 Cancelar
             </button>
         </div>
-        
-    </form>
 
+        <div class="executores" *ngIf="somenteLeitura">
+            <button
+            type="button"
+            class="btn-modal">
+                Editar
+            </button>
+            
+            <button
+            type="button"
+            class="btn-modal"
+            (click)="excluirRegistro()">
+                Excluir
+            </button>
+
+            <button
+            type="button"
+            class="btn-modal"
+            (click)="cancelarRegistro()">
+                Voltar
+            </button>
+        </div>
+    </form>
+</dialog>
+
+<dialog class="aviso" #aviso>
+    <span>
+        {{ mensagem }}
+    </span>
+
+    <button (click)="fecharAviso()">
+        Ok
+    </button>
 </dialog>
