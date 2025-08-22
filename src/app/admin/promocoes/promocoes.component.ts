@@ -29,6 +29,7 @@ export class PromocoesComponent implements OnInit{
   mensagem        : string = ''
   dataGrid        : Array<any> = []
   somenteLeitura  = false
+  salvarEditando  = false
 
   constructor(private servico : PromocoesService){}
 
@@ -43,6 +44,7 @@ export class PromocoesComponent implements OnInit{
 
   cancelarRegistro(){
     this.somenteLeitura = false
+    this.salvarEditando = false
     this.itens.somenteLeitura = false
     this.modal.nativeElement.close()
     this.itens.dataGrid = []
@@ -104,6 +106,36 @@ export class PromocoesComponent implements OnInit{
     this.dataRow = data
     
     this.modal.nativeElement.showModal()
+  }
+
+  async editarRegistro(){
+    this.salvarEditando = true
+    let data = await this.servico.consultaPromocao(this.dataRow.ID_PROMOCAO)
+
+    this.itens.dataGrid = data.ITENS
+    delete data.ITENS
+    this.dataRow = data
+
+    this.modal.nativeElement.showModal()
+  }
+
+  async alteraRegistro(){
+    let data = await this.servico.alteraPromocao(
+      this.dataRow        ,
+      this.itens.dataGrid ,
+      this.dataRow.ID_PROMOCAO
+    )
+
+    if(data.sucesso){
+      this.mensagem = data.mensagem
+      this.dataGrid = await this.servico.gridPromocoes()
+      this.cancelarRegistro()
+      this.aviso.nativeElement.showModal()
+    }
+    else{
+      this.mensagem = data.mensagem
+      this.aviso.nativeElement.showModal()
+    }
   }
 
 }

@@ -13,7 +13,8 @@
 
         <button
         class="btn-ferramentas"
-        [disabled]="!dataRow.ID_PROMOCAO">
+        [disabled]="!dataRow.ID_PROMOCAO"
+        (click)="editarRegistro()">
             Alterar
         </button>
 
@@ -69,7 +70,7 @@
 <dialog class="modal" #modal>
     <form
     #dataForm="ngForm"
-    (ngSubmit)="salvarRegistro()">
+    (ngSubmit)="salvarEditando ? alteraRegistro () : salvarRegistro()">
 
         <label for="CD_PROMOCAO">
             Código:
@@ -141,7 +142,7 @@
             type="submit"
             class="btn-modal"
             [disabled]="dataForm.invalid || (itens ? itens.telaRegistro : false)">
-                Salvar
+                {{ salvarEditando ? "Salvar Alteração" : "Salvar Registro"}}
             </button>
 
             <button
@@ -155,7 +156,8 @@
         <div class="executores" *ngIf="somenteLeitura">
             <button
             type="button"
-            class="btn-modal">
+            class="btn-modal"
+            (click)="salvarEditando=true;somenteLeitura=false;itens.somenteLeitura=false">
                 Editar
             </button>
             
@@ -181,7 +183,7 @@
         {{ mensagem }}
     </span>
 
-    <button (click)="fecharAviso()">
+    <button type="button" (click)="fecharAviso()">
         Ok
     </button>
 </dialog>

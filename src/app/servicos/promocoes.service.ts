@@ -87,4 +87,19 @@ export class PromocoesService {
 
     return data
   }
+
+  async alteraPromocao(dataRow : object, dataItens : Array<any>, ID_PROMOCAO : number){
+
+    let body = Object.assign(dataRow, {ITENS: dataItens})
+
+    let request = await fetch(environment.API + `promocoes/${ID_PROMOCAO}/altera`,{
+      method: "PUT",
+      headers: this.headers,
+      body: JSON.stringify(body)
+    })
+
+    let data = await request.json()
+
+    return data
+  }
 }
