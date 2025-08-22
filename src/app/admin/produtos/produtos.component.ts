@@ -27,9 +27,9 @@ export class ProdutosComponent implements OnInit {
   IMG_PRODUTO : any
   IMG_INPUT: any
 
-  @ViewChild('modal') modal !: ElementRef
-  @ViewChild('aviso') aviso !: ElementRef
-  @ViewChild('imagem') imagem !: ElementRef
+  @ViewChild('modal') modal !: ElementRef<HTMLDialogElement>;
+  @ViewChild('aviso') aviso !: ElementRef<HTMLDialogElement>;
+  @ViewChild('imagem') imagem !: ElementRef<HTMLDialogElement>;
 
   mensagem        : string = ''
   dataCategorias  : Array<any> = []
@@ -138,7 +138,7 @@ export class ProdutosComponent implements OnInit {
       this.dataGrid = await this.servico.gridProduto()
       this.mensagem = data.mensagem
       this.cancelarRegistro()
-      this.dataRow.ID_PRODUTO = 0 
+      this.dataRow.ID_PRODUTO = 0
       this.aviso.nativeElement.showModal()
     }
     else{
