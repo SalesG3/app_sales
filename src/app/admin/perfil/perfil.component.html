@@ -1,0 +1,144 @@
+<section class="componente">
+    <form (ngSubmit)="alteraRegistro()">
+        <img [src]="dataRow.IMG_ENTIDADE" alt="LOGO_ENTIDADE">
+    
+        <input
+        type="file"
+        name="IMG_INPUT"
+        id="IMG_INPUT"
+        (change)="tratarImagem($event)"
+        [disabled]="somenteLeitura"
+        >
+    
+        <label for="NM_ENTIDADE">
+            Nome Fantasia:
+        </label>
+    
+        <input
+        type="text"
+        name="NM_ENTIDADE"
+        id="NM_ENTIDADE"
+        [(ngModel)]="dataRow.NM_ENTIDADE"
+        [disabled]="somenteLeitura"
+        >
+    
+        <label for="CD_ENTIDADE">
+            CNPJ:
+        </label>
+    
+        <input
+        type="text"
+        name="CD_ENTIDADE"
+        id="CD_ENTIDADE"
+        [(ngModel)]="dataRow.CD_ENTIDADE"
+        disabled
+        >
+
+        <label for="ALIAS_ENTIDADE">
+            Alias:
+        </label>
+
+        <input
+        type="text"
+        name="ALIAS_ENTIDADE"
+        id="ALIAS_ENTIDADE"
+        [(ngModel)]="dataRow.ALIAS_ENTIDADE"
+        disabled
+        >
+    
+        <label for="DS_ENTIDADE">
+            Descrição:
+        </label>
+    
+        <input
+        type="text"
+        name="DS_ENTIDADE"
+        id="DS_ENTIDADE"
+        [(ngModel)]="dataRow.DS_ENTIDADE"
+        [disabled]="somenteLeitura"
+        >
+    
+        <label for="TEL_ENTIDADE">
+            Telefone:
+        </label>
+    
+        <input
+        type="tel"
+        name="TEL_ENTIDADE"
+        id="TEL_ENTIDADE"
+        [(ngModel)]="dataRow.TEL_ENTIDADE"
+        [disabled]="somenteLeitura"
+        >
+    
+        <label for="CEL_ENTIDADE">
+            WhatsApp:
+        </label>
+    
+        <input
+        type="tel"
+        name="CEL_ENTIDADE"
+        id="CEL_ENTIDADE"
+        [(ngModel)]="dataRow.CEL_ENTIDADE"
+        [disabled]="somenteLeitura"
+        >
+
+        <label for="EMA_ENTIDADE">
+            Email:
+        </label>
+
+        <input
+        type="text"
+        name="EMA_ENTIDADE"
+        id="EMA_ENTIDADE"
+        [(ngModel)]="dataRow.EMA_ENTIDADE"
+        [disabled]="somenteLeitura"
+        >
+    
+        <label for="END_ENTIDADE">
+            Endereço
+        </label>
+    
+        <input
+        type="text"
+        name="END_ENTIDADE"
+        id="END_ENTIDADE"
+        [(ngModel)]="dataRow.END_ENTIDADE"
+        [disabled]="somenteLeitura"
+        >
+
+        <button
+        type="button"
+        *ngIf="somenteLeitura"
+        (click)="somenteLeitura = false">
+            Editar
+        </button>
+
+        <button
+        type="submit"
+        *ngIf="!somenteLeitura">
+            Salvar
+        </button>
+
+        <button
+        type="button"
+        (click)="cancelarRegistro()"
+        *ngIf="!somenteLeitura">
+            Cancelar
+        </button>
+
+    </form>
+</section>
+
+<dialog class="aviso" #aviso>
+    <span>
+        {{ mensagem }}
+    </span>
+
+    <button
+    type="button"
+    (click)="fecharAviso()">
+        Ok
+    </button>
+</dialog>
+
+

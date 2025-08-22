@@ -10,11 +10,13 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './menu.component.css'
 })
 export class MenuComponent implements OnInit{
-  NM_ENTIDADE : string = ''
+  NM_ENTIDADE  : string = ''
+  IMG_ENTIDADE : string = ''
 
   constructor(private servico:AdminService, private router:Router){
     
     this.NM_ENTIDADE = servico.NM_ENTIDADE
+    this.IMG_ENTIDADE = servico.IMG_ENTIDADE
   }
 
   ngOnInit(): void {

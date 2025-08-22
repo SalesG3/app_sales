@@ -46,6 +46,7 @@ export class PromocoesComponent implements OnInit{
     this.somenteLeitura = false
     this.salvarEditando = false
     this.itens.somenteLeitura = false
+    this.itens.telaRegistro = false
     this.modal.nativeElement.close()
     this.itens.dataGrid = []
     this.itens.dataRow.ID_PRODUTO = 0

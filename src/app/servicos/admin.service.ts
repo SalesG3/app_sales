@@ -12,8 +12,9 @@ export class AdminService {
 
   constructor() { }
 
-  ID_ENTIDADE = 0
-  NM_ENTIDADE = ''
+  ID_ENTIDADE   = 0
+  NM_ENTIDADE   = ''
+  IMG_ENTIDADE  = ''
 
   async loginAdmin(dataRow:object){
 
@@ -27,8 +28,9 @@ export class AdminService {
     let data = await request.json()
 
     if(data.sucesso){
-      this.ID_ENTIDADE = data.ID_ENTIDADE
-      this.NM_ENTIDADE = data.NM_ENTIDADE
+      this.ID_ENTIDADE  = data.ID_ENTIDADE
+      this.NM_ENTIDADE  = data.NM_ENTIDADE
+      this.IMG_ENTIDADE = data.IMG_ENTIDADE
     }
 
     return data

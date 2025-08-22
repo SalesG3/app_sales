@@ -48,6 +48,7 @@
             <tr
             *ngFor="let i of dataGrid"
             (click)="dataRow.ID_PRODUTO = i.ID_PRODUTO"
+            (dblclick)="consultaRegistro()"
             [ngClass]="{'linha': dataRow.ID_PRODUTO === i.ID_PRODUTO}"
             >
                 <td class="CD_PRODUTO">

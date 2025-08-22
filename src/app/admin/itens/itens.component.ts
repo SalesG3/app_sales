@@ -25,9 +25,9 @@ export class ItensComponent implements OnInit{
   dataProdutos    : Array<any> = []
   telaRegistro    = false
   salvarEditando  = false
+  somenteLeitura  = false
 
   @ViewChild('aviso') aviso !: ElementRef
-  somenteLeitura = false
 
   constructor(private servico : PromocoesService){ }
 

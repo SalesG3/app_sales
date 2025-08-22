@@ -58,6 +58,7 @@
             <tr
             *ngFor="let cat of dataGrid"
             (click)="dataRow.ID_CATEGORIA = cat.ID_CATEGORIA"
+            (dblclick)="consultaRegistro()"
             [ngClass]="{'linha': dataRow.ID_CATEGORIA === cat.ID_CATEGORIA}"
             >
                 <td class="CD_CATEGORIA">
